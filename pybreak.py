@@ -1,8 +1,17 @@
 import tkinter
 from tkinter import ttk
 import math
-from PIL import Image, ImageTk
-import os
+import os, sys
+
+try:
+    from PIL import Image, ImageTk
+except ImportError:
+    error = """The PyBreak needs PIL to run but failed to import it.
+    Please consider to install the libarary Pillow by:
+
+    $ pip install Pillow
+    """
+    sys.exit(error)
 
 class Vector2D:
     """Represents a 2d vector."""
