@@ -1,0 +1,8 @@
+0: None
+1: Block
+2: HardBlock
+3: SplitBlock
+4: ExtendBlock
+5: ShortenBlock
+6: SpeedUpBlock
+7: SlowDownBlock
