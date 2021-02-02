@@ -285,23 +285,30 @@ class Paddle(Rectangle):
 
     def __init__(self, *args):
         super().__init__(*args)
-        self.velocity = Vector2D(self.game.width // 150, 0)
+        self.velocity = Vector2D(self.game.width // 50, 0)
+        self.direction = 0
+
+    def update(self):
+        self.move(self.direction * self.velocity)
+        self.direction = 0
 
     def right_key(self, _):
         if not self.game.is_running:
             return
-        dx = min(self.velocity.x, self.game.width - self.right_edge_x())
-        self.move(dx)
+        self.direction = 1
     
     def left_key(self, _):
         if not self.game.is_running:
             return
-        dx = -min(self.velocity.x, self.left_edge_x())
-        self.move(dx)
+        self.direction = -1
     
-    def move(self, dx):
-        self.game.cv.move(self.id, dx, 0)
-        self.center += Vector2D(dx, 0)
+    def move(self, diff):
+        right_most = self.right_edge_x() >= self.game.width and diff.x >= 0
+        left_most = self.left_edge_x() <= 0 and diff.x <= 0
+        if right_most or left_most:
+            return
+        self.game.cv.move(self.id, diff.x, diff.y)
+        self.center += diff
 
 class Block(Rectangle):
     """Represents a Block."""
@@ -461,8 +468,7 @@ class Game:
 
     def game_over(self):
         self.is_running = False
-        self.restart_button['bg']='green'
-        self.restart_button['fg']='white'
+        self.restart_button['fg']='green'
         self.message.set(self.over_str)
 
     def game_clear(self):
@@ -479,7 +485,7 @@ class Game:
         ttk.Label(self.frame, textvariable=self.score).place(
             x=widgetw, y=0, width=widgetw, height=widgeth)
         self.message = tkinter.StringVar(value=self.instruction_str)
-        tkinter.Label(self.frame, textvariable=self.message, fg='red').place(
+        tkinter.Label(self.frame, textvariable=self.message, fg='red', bg='#ececec').place(
             x=self.width / 2 - widgetw / 2, y=0, width=widgetw, height=widgeth)
         self.restart_button = tkinter.Button(self.frame, text='Restart', command=self.start)
         self.restart_button.place(x=self.width - widgetw, y=0, width=widgetw, height=widgeth)
@@ -492,7 +498,6 @@ class Game:
         self.objects = {}
         self.cv.delete('all')
         self.score.set(0)
-        self.restart_button['bg']='white'
         self.restart_button['fg']='black'
         self.message.set(self.instruction_str)
 
