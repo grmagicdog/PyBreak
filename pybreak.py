@@ -562,7 +562,7 @@ def parse_stage(file, block_type):
 if __name__ == '__main__':
     block_type = parse_dict('config/block_type')
     stage_dir = 'stage/'
-    stage_file = 'demo'
+    stage_file = 'demo' if len(sys.argv) == 1 else sys.argv[1]
     stage = parse_stage(stage_dir + stage_file, block_type)
     game = Game(stage, 1280, 720)
     game.start()
