@@ -401,7 +401,6 @@ class Game:
     """A class for holding every information needed for the PyBreak game.
     
     Any other object for the game should be passed a Game object during initiation."""
-    base_names = {'Wall', 'GameObject'}
     instruction_str = 'MOVE:  <  >\nRELEASE:  SPACE'
     over_str = 'Game Over!'
     clear_str = 'Game Clear!\nCongratulations!'
@@ -441,7 +440,7 @@ class Game:
         until one of the base_names"""
         for c in cls.__mro__:
             yield c.__name__
-            if c.__name__ in Game.base_names:
+            if c == GameObject:
                 break
 
     def start(self):
