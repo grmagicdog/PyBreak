@@ -1,3 +1,7 @@
+__author__ = 'Rui Gao <g201tg2014@dhw.ac.jp>'
+__version__ = '0.1'
+__date__    = '04 Feb 2021'
+
 import tkinter
 from tkinter import ttk
 import math
@@ -12,6 +16,10 @@ except ImportError:
     $ pip install Pillow
     """
     sys.exit(error)
+
+###############
+# Math Models #
+###############
 
 class Vector2D:
     """Represents a 2d vector."""
@@ -113,6 +121,10 @@ class Line2D:
     def perpendicular(self, point: Vector2D):
         p_to_a = self.a - point
         return p_to_a.project(self.n) - p_to_a
+
+###############
+# GameObjects #
+###############
 
 class GameObject:
     
@@ -397,6 +409,10 @@ class SlowDownBlock(Block):
     def apply_effect(self, ball):
         ball.velocity *= 1 / 1.5
 
+#############
+# Game Info #
+#############
+
 class Game:
     """A class for holding every information needed for the PyBreak game.
     
@@ -543,6 +559,10 @@ class Stage:
         self.m = m
         self.n = n
         self.blocks = blocks
+
+########
+# main #
+########
 
 def parse_dict(file):
     result = {}
