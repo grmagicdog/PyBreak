@@ -39,14 +39,14 @@ A dictionary maps string of class name to list of corresponding objects, for all
 | ... |...|
 
 - ```game.start()```
-Will start to run the game, which calls `obj.update()` every `dt` milliseconds for any `obj` where `obj` is a `GameObject` object and ==belongs to== `game`.
+Will start to run the game, which calls `obj.update()` every `dt` milliseconds for any `obj` where `obj` is a `GameObject` object and *belongs to* `game`.
  
 ### `class GameObject`
 All objects used for the game should be a instance of `GameObject`.
 However, the `GameObject` class is not supposed to be instanciated directly. Instead, use a subclass of `GameObject` with a constructor of:
 
     __init__(self, game, *args, **kwargs)
-This will make sure that the given `game` object knows this new object ==belongs to== itself.
+This will make sure that the given `game` object knows this new object *belongs to* itself.
 
 ### `class Stage`
 **NOTE: Instead of instanciating `Stage` objects, it's better to use files, which will be described  next.**
