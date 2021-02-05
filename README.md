@@ -1,4 +1,5 @@
 
+
 # PyBreak
 A block breaking game based on Python!
 
@@ -46,6 +47,32 @@ However, the `GameObject` class is not supposed to be instanciated directly. Ins
 
     __init__(self, game, *args, **kwargs)
 This will make sure that the given `game` object knows this new object ==belongs to== itself.
+
+### `class Stage`
+**NOTE: Instead of instanciating `Stage` objects, it's better to use files, which will be described  next.**
+
+	__init__(self, name, m, n, blocks)
+
+- `name`
+The name of the stage. Will be displayed in the title of the window.
+- `m`
+The number of rows of blocks.
+- `n`
+The number of cols of blocks.
+- `blocks`
+A list of lists of block classes in a row.
+
+### Files for Stage
+ - In the directory `config`, there is a file named `block_type`, which maps symbols to subclasses of `Block` in a format of
+ 
+    {symbol}: {class_name}
+
+ - In the directory `stage`, every file defines a stage with
+   * its file name as `stage.name`, which is also the **command line argument for stage selection**
+   * first line consists of 2 integers as `stage.m` and `stage.n`, respectively
+   * remaining lines as `stage.blocks` using symbols defined in `block_type` mentioned above.
+   
+ - Take a look at existing files for an example.
 
 ## Physics Engine
 ### Collision Detection
@@ -98,7 +125,7 @@ An ExtendBlock. Extends the paddle.
 ![ShortenBlock](https://user-images.githubusercontent.com/48979946/106998476-ea2e7c80-67c7-11eb-94d2-d9989b6c964e.png)
 
 A ShortenBlock. Shortens the paddle.
-- If hit by a `ball`, shortens the `paddle` by $\frac{1}{3}$.
+- If hit by a `ball`, shortens the `paddle` by 1/3.
 
 ### `class SpeedUpBlock`
 ![SpeedUpBlock](https://user-images.githubusercontent.com/48979946/106998482-ec90d680-67c7-11eb-9ec2-250bf464c252.png)
@@ -110,4 +137,4 @@ A SpeedUpBlock. Speeds up the ball.
 ![SlowDownBlock](https://user-images.githubusercontent.com/48979946/106998481-ebf84000-67c7-11eb-92bb-e1a61419e4df.png)
 
 A SlowDownBlock. Slows down the ball.
-- If hit by a `ball`, slows it down by $\frac{1}{3}$.
+- If hit by a `ball`, slows it down by 1/3.
