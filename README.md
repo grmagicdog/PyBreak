@@ -2,6 +2,7 @@
 
 # PyBreak
 A block breaking game based on Python!
+<img width="958" alt="2021-02-17" src="https://user-images.githubusercontent.com/48979946/108188189-a25a0e80-7152-11eb-93b5-29d1e7c451b6.png">
 
 ## Requirements
 -  Python3
