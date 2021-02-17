@@ -583,10 +583,20 @@ def parse_stage(file, block_type):
     name = file.split('/')[-1]
     return Stage(name, m, n, blocks)
 
-if __name__ == '__main__':
-    block_type = parse_dict('config/block_type')
+def main():
+    config_file = 'config/block_type'
     stage_dir = 'stage/'
     stage_file = 'demo' if len(sys.argv) == 1 else sys.argv[1]
-    stage = parse_stage(stage_dir + stage_file, block_type)
+    try:
+        block_type = parse_dict(config_file)
+    except FileNotFoundError:
+        sys.exit('Config file "{}" is missing!'.format(config_file))
+    try:
+        stage = parse_stage(stage_dir + stage_file, block_type)
+    except FileNotFoundError:
+        sys.exit('There is no stage named "{}". Add one in {} if you like!'.format(stage_file, stage_dir))
     game = Game(stage, 1280, 720)
     game.start()
+
+if __name__ == '__main__':
+    main()
