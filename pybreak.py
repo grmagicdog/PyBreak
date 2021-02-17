@@ -386,7 +386,6 @@ class SplitBlock(Block):
         new_ball.velocity = -ball.velocity
         new_ball.released = True
 
-
 class ExtendBlock(Block):
 
     def apply_effect(self, _):
